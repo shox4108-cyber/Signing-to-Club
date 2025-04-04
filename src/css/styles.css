@@ -1,0 +1,528 @@
+@font-face {
+    font-family: 'RO';
+    src: url('../fonts/RussoOne-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'ML';
+    src: url('../fonts/Montserrat-Light.ttf');
+}
+
+@keyframes formAppear {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fieldAppear {
+    0% {
+        opacity: 0;
+        right: -50%;
+    }
+
+    100% {
+        opacity: 1;
+        right: 0;
+    }
+}
+
+@keyframes fieldDisAppear {
+    0% {
+        opacity: 1;
+        right: 0;
+    }
+
+    100% {
+        opacity: 0;
+        right: -50%;
+    }
+}
+
+@keyframes lightning {
+    0% {
+        box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    50% {
+        box-shadow: inset 0 2px 10px rgba(255, 255, 255, 0.5);
+    }
+
+    100% {
+        box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+}
+
+@keyframes hide {
+    0% {
+        left: 5%;
+    }
+
+    50% {
+        left: 4.5%;
+    }
+
+    100% {
+        left: 4%;
+    }
+    
+}
+
+body {
+    background: #000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.loading-screen {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: black;
+    color: white;
+    font-size: 20px;
+    flex-direction: column;
+    gap: 10px;
+    font-family: 'RO';
+    text-align: center;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid white;
+    border-top: 5px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+    margin-bottom: 30px;
+}
+
+
+.wrapper {
+
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    animation: formAppear 1s ease-in-out;
+}
+
+.all__sports {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    color: white;
+    font-size: 20px;
+    flex-wrap: wrap;
+    gap: 50px;
+    padding: 60px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-family: 'RO';
+    text-align: center;
+}
+
+.all__sports-box {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(15px);
+    padding: 10px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 40px;
+    cursor: pointer;
+    position: fixed;
+    top: 4%;
+    left: 4%;
+    color: rgba(0, 0, 0, 0.5);
+    animation: formAppear 1s ease-in-out;
+}
+
+
+
+.bgBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -2;
+}
+
+
+.wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+}
+
+.main {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    transition: all 500ms ease-in-out;
+}
+
+.main__form {
+    max-width: 450px;
+    width: 100%;
+    height: 500px;
+    background: rgba(61, 61, 61, 0.5);
+    backdrop-filter: blur(15px);
+    display: flex;
+    align-items: center;
+    padding: 26px 0;
+    flex-direction: column;
+    color: aliceblue;
+    border-radius: 20px;
+    box-shadow: inset 0 5px 40px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transition: all 600ms;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-550%, -50%);
+}
+
+.form__active {
+    transform: translate(-50%, -50%);
+    animation: formAppear 2s ease-in-out forwards;
+    transition: all 600ms;
+}
+
+.main__form-title {
+    font-family: 'RO';
+    font-size: 45px;
+    margin-bottom: 5px;
+}
+
+span {
+    mix-blend-mode: overlay;
+}
+
+.main__form-subtitle {
+    font-family: 'ML';
+    font-size: 17px;
+    margin-bottom: 60px;
+}
+
+
+.main__form-selector {
+    background: none;
+    color: white;
+    border: solid 2px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    outline: none;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+    transition: all 400ms;
+    max-width: 303px;
+    width: 100%;
+}
+
+.main__form-selector::after {
+    content: '▼';
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    pointer-events: none;
+
+}
+
+
+.main__form-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-family: 'ML';
+    color: white;
+    border: none;
+    outline: none;
+    transition: all 400ms;
+    background: none;
+    width: 100%;
+    height: 100%;
+    padding: 15px 50px 15px 30px;
+    cursor: pointer;
+}
+
+
+.main__form-option {
+    font-family: 'RO';
+}
+
+.main__form-inputor {
+    background: none;
+    color: white;
+    border: solid 2px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    outline: none;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+    font-family: 'ML';
+    margin-top: 20px;
+    max-width: 303px;
+    width: 100%;
+}
+
+.main__form-inputor-update {
+    animation: lightning 1s linear infinite;
+}
+
+.main__form-input {
+    background: none;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    font-family: 'ML';
+    padding: 12px 30px;
+}
+
+
+.main__form-btn {
+    font-family: 'ML';
+    background: none;
+    border: none;
+    border-left: 1px solid rgba(0, 0, 0, 0.5);
+    color: white;
+    outline: none;
+    padding: 12px 30px;
+    cursor: pointer;
+    transition: all 400ms;
+}
+
+.main__form-btn:hover {
+    box-shadow: inset 0 1px 5px rgba(255, 255, 255, 0.5);
+    border-radius: 0 15px 15px 0;
+}
+
+.main__form-img {
+    width: 106%;
+    height: 190px;
+    position: absolute;
+    bottom: 0;
+    transition: all 400ms;
+}
+
+.main__all-clubs {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: all 400ms;
+    font-family: 'ML';
+    font-size: medium;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(15px);
+    border: none;
+    color: white;
+    outline: none;
+    padding: 7px;
+    border-radius: 0 0 15px 15px;
+    z-index: 5;
+    cursor: pointer;
+}
+
+.selected-field {
+    gap: 50px;
+}
+
+.field {
+    width: 50%;
+    background: rgba(61, 61, 61, 0.5);
+    backdrop-filter: blur(15px);
+    border-radius: 15% 0 0 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fieldAppear 600ms ease-in-out;
+    transition: all 600ms;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -50%;
+    
+}
+
+.field__hide-btn {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    border-left: 35px solid rgba(255, 255, 255, 0.5);
+    left: 5%;
+    animation: hide 1s ease-in-out infinite;
+    transition: left 1s ease-in-out;
+    cursor: pointer;
+}
+
+.field__list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-height: 600px;
+    height: 100%;
+    overflow-y: scroll;
+    gap: 15px;
+    margin-top: 70px;
+}
+
+.field__list-noplayer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 100%;
+    gap: 15px;
+}
+
+.field__players {
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+    max-height: 700px;
+    height: 100%;
+    text-align: center;
+    border: none;
+    outline: none;
+    background: none;
+    animation: formAppear 1s ease-in-out;
+}
+
+.field__img {
+    width: 100%;
+    border-radius: 15px;
+    position: absolute;
+    object-fit: fill;
+    height: 100%;
+    top: 0;
+    animation: formAppear 1s ease-in-out;
+    transition: all 400ms;
+    left: 0;
+    z-index: -1;
+}
+
+.field__title {
+    transition: all 400ms;
+    font-family: 'RO';
+    padding: 5px 10px;
+    border-radius: 15px 15px 0 0;
+    color: white;
+    mix-blend-mode: multiply;
+    font-size: 39px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    animation: formAppear 1s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.field__subtitle {
+    font-family: 'RO';
+    animation: formAppear 1s ease-in-out;
+    color: aliceblue;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 20px;
+}
+
+.field__player {
+    font-family: 'RO';
+    animation: formAppear 1s ease-in-out;
+    color: aliceblue;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 220px;
+    width: 100%;
+    height: 40px;
+}
+
+.field__btn-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.field__player-edit,
+.field__player-delete,
+.field__player-person {
+    background: none;
+    color: aliceblue;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 400ms;
+}
+
+.field__player-edit:hover {
+    color: rgb(153, 186, 249);
+}
+
+.field__player-delete:hover {
+    color: rgb(253, 107, 107);
+}
+
+.field__player-name {
+    width: 100px;
+    /* Set a fixed width */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
