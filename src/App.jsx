@@ -10,6 +10,7 @@ function App() {
   const [editingPlayer, setEditingPlayer] = useState(null);
   const [isFieldVisible, setIsFieldVisible] = useState(false);
   const [allSports, setAllSports] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const [option, setOption] = useState([
     {
@@ -108,12 +109,22 @@ function App() {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
-    setTimeout(() => {
-      setIsPageLoaded(true);
-    }, 2000);
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 1000);
+      if (window.innerWidth > 1000) {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1500);
+        setTimeout(() => {
+          setIsPageLoaded(true);
+        }, 2000);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -125,11 +136,19 @@ function App() {
   return (
     <>
       {isLoading ? (
-        <div className="loading-screen">
-          <div className="spinner"></div>
-          <p>WARMING UP THE FIELD </p>
-          <p>⚽ 🏀 🎾</p>
-        </div>
+        isSmallScreen ? (
+          <div className="loading-screen">
+            <div className="spinner"></div>
+            <p>NEED A BIGGER SCREEN FOR GAME TIME "LAPTOP MAYBE"</p>
+            <p>⚽ 🏀 🎾</p>
+          </div>
+        ) : (
+          <div className="loading-screen">
+            <div className="spinner"></div>
+            <p>WARMING UP THE FIELD </p>
+            <p>⚽ 🏀 🎾</p>
+          </div>
+        )
       ) : (
         <div className="wrapper">
           <video width="600" autoPlay loop muted className="bgBackground">
@@ -146,7 +165,7 @@ function App() {
               </div>
               {option &&
                 option.map((item) => (
-                  <div className="field__players">
+                  <div className="field__players" key={item.id}>
                     <h1 className="field__title">{item.name}</h1>
                     <img
                       src={item.img}
@@ -161,7 +180,7 @@ function App() {
                       {item.players.length > 0 ? (
                         item.players.map((player) => (
                           <div key={player.id} className="field__player">
-                            <div className="field__player-name">
+                            <div className="field__player-name fullName">
                               {player.player}
                             </div>
                           </div>
@@ -270,16 +289,13 @@ function App() {
                   className="field__hide-btn"
                   onClick={() => {
                     setIsFieldVisible(!isFieldVisible),
-                    setTimeout(() => {
-                      setField({ id: "", name: "" });
-                    }, 2000);
+                      setTimeout(() => {
+                        setField({ id: "", name: "" });
+                      }, 2000);
                   }}
                 ></div>
                 <div className="field__players">
-                  {field? 
-                  <h1 className="field__title">{field.name}</h1>
-                  : ''
-                }
+                  {field ? <h1 className="field__title">{field.name}</h1> : ""}
                   {field.id && (
                     <img
                       src={option.find((item) => item.id === field.id)?.img}

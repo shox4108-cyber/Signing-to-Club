@@ -395,6 +395,7 @@ span {
     animation: hide 1s ease-in-out infinite;
     transition: left 1s ease-in-out;
     cursor: pointer;
+    z-index: 1;
 }
 
 .field__list {
@@ -522,7 +523,11 @@ span {
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: left;
-    display: flex;
-    align-items: center;
     gap: 3px;
+}
+
+.fullName {
+
+    text-align: center !important;
+    width: 200px !important;
 }
